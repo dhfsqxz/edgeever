@@ -26,6 +26,7 @@ interface LoginScreenProps {
 const LOGIN_INPUT_CLASSNAME = "h-11 rounded-lg bg-slate-50/50 px-3.5 focus-visible:bg-card focus-visible:ring-2 focus-visible:ring-slate-900/10";
 const LOGIN_SUBMIT_CLASSNAME = "h-11 w-full justify-center rounded-lg bg-[#047857] font-semibold text-white hover:bg-[#065f46] disabled:bg-[#475569] disabled:opacity-100";
 const LOGIN_LINK_CLASSNAME = "text-xs text-slate-600 underline-offset-2 hover:text-slate-900 hover:underline";
+
 const MfaLoginForm = ({ username, isSubmitting, error, onSubmit, onBack }: MfaLoginStepProps) => {
   const { t } = useTranslation();
   const [useRecovery, setUseRecovery] = useState(false);
@@ -109,6 +110,7 @@ const MfaLoginForm = ({ username, isSubmitting, error, onSubmit, onBack }: MfaLo
     </form>
   );
 };
+
 const DEMO_LOGIN_CREDENTIALS = {
   username: "ee-demo",
   password: "demo#dZ6Q29Zjfor%",
@@ -140,6 +142,7 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
       password,
     });
   };
+
   return (
     <main className="flex h-[100dvh] items-center justify-center bg-[var(--workspace-canvas)] px-4 py-8 text-slate-950">
       <GitHubRepositoryLink className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 h-10 w-10 justify-center rounded-full border border-slate-200 bg-card/85 text-slate-600 backdrop-blur transition hover:border-slate-300 hover:bg-card hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20" iconClassName="h-5 w-5" />
