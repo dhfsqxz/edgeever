@@ -1,9 +1,8 @@
 import { useState, type FormEvent } from "react";
-import { LockKeyhole } from "lucide-react";
+import { ShieldCheck } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { normalizeInstanceUrl } from "@edgeever/shared/public-demo";
 import { Button } from "@/components/ui/button";
-import { GitHubRepositoryLink } from "@/components/GitHubRepositoryLink";
 import { Input } from "@/components/ui/input";
 
 export type MfaLoginStepProps = {
@@ -24,7 +23,7 @@ interface LoginScreenProps {
 }
 
 const LOGIN_INPUT_CLASSNAME = "h-11 rounded-lg bg-slate-50/50 px-3.5 focus-visible:bg-card focus-visible:ring-2 focus-visible:ring-slate-900/10";
-const LOGIN_SUBMIT_CLASSNAME = "h-11 w-full justify-center rounded-lg bg-[#047857] font-semibold text-white hover:bg-[#065f46] disabled:bg-[#475569] disabled:opacity-100";
+const LOGIN_SUBMIT_CLASSNAME = "h-11 w-full justify-center rounded-lg bg-slate-900 font-semibold text-white hover:bg-slate-800 disabled:bg-slate-400 disabled:opacity-100";
 const LOGIN_LINK_CLASSNAME = "text-xs text-slate-600 underline-offset-2 hover:text-slate-900 hover:underline";
 
 const MfaLoginForm = ({ username, isSubmitting, error, onSubmit, onBack }: MfaLoginStepProps) => {
@@ -58,7 +57,8 @@ const MfaLoginForm = ({ username, isSubmitting, error, onSubmit, onBack }: MfaLo
           {useRecovery ? t("twoFactor.loginRecoveryDescription") : t("twoFactor.loginDescription", { username })}
         </p>
       </div>
-      {useRecovery ? (
+
+            {useRecovery ? (
         <label className="block">
           <span className="mb-2 block text-sm font-semibold text-slate-700">{t("twoFactor.recoveryCode")}</span>
           <Input
@@ -110,7 +110,6 @@ const MfaLoginForm = ({ username, isSubmitting, error, onSubmit, onBack }: MfaLo
     </form>
   );
 };
-
 const DEMO_LOGIN_CREDENTIALS = {
   username: "ee-demo",
   password: "demo#dZ6Q29Zjfor%",
@@ -142,19 +141,16 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
       password,
     });
   };
-
   return (
     <main className="flex h-[100dvh] items-center justify-center bg-[var(--workspace-canvas)] px-4 py-8 text-slate-950">
-      <GitHubRepositoryLink className="absolute right-4 top-[max(1rem,env(safe-area-inset-top))] z-10 h-10 w-10 justify-center rounded-full border border-slate-200 bg-card/85 text-slate-600 backdrop-blur transition hover:border-slate-300 hover:bg-card hover:text-slate-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900/20" iconClassName="h-5 w-5" />
-
       <section className="relative w-full max-w-[400px] rounded-2xl border border-slate-200 bg-card/95 p-8 shadow-[0_20px_50px_rgb(0_0_0/0.08)] backdrop-blur-md">
         <div className="mb-8 flex items-center gap-4">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-600">
-            <LockKeyhole className="h-5.5 w-5.5" />
+            <ShieldCheck className="h-5.5 w-5.5" />
           </div>
           <div className="min-w-0">
-            <h1 className="text-xl font-bold leading-tight tracking-tight text-slate-900">{t("login.title")}</h1>
-            <p className="mt-1 text-xs font-medium tracking-wide text-slate-500">{t("login.subtitle")}</p>
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-slate-900">访问受限</h1>
+            <p className="mt-1 text-xs font-medium tracking-wide text-slate-500">仅限授权人员使用</p>
           </div>
         </div>
 
@@ -194,7 +190,6 @@ export const LoginScreen = ({ error, instanceUrl: initialInstanceUrl, isSubmitti
               />
             </label>
           ) : null}
-
           <label className="block">
             <span className="mb-2 block text-sm font-semibold text-slate-700">{t("login.username")}</span>
             <Input
